@@ -1,15 +1,27 @@
-    // Question: What does this code do?
+
+
     $("#add-btn").on("click", function(event) {
       event.preventDefault();
-      var newCharacter = {
+      const makeRes = {
         name: $("#name").val().trim(),
-        role: $("#role").val().trim(),
-        age: $("#age").val().trim(),
-        forcePoints: $("#force-points").val().trim()
+        phone: $("#phone").val().trim(),
+        email: $("#email").val().trim(),
+        uniqueID: $("#uniqueID").val().trim()
       };
 
-      // Question: What does this code do??
-      $.post("/api/characters", newCharacter)
+      $.get("/api/reservations/", function(data) {
+        console.log(data);
+        if (data.length < 5) {
+          $.post("/api/reservations", makeRes)
+          // .then(function({})
+        }else { 
+          $.post("/api/waitList", makeRes)
+          // .then(function{})
+        }
+      });
+
+
+      $.post("/api/reservations", makeRes)
         .then(function(data) {
           console.log("add.html", data);
           alert("Adding character...");
