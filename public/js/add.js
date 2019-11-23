@@ -19,8 +19,7 @@
           // .then(function{})
         }
       });
-
-
+      
       $.post("/api/reservations", makeRes)
         .then(function(data) {
           console.log("add.html", data);

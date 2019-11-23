@@ -1,4 +1,4 @@
-    $("#search-btn").on("click", function() {
+    $("#viewTables").on("click", function() {
       var searchedCharacter = $("#character-search").val().trim();
 
       // Using a RegEx Pattern to remove spaces from searchedCharacter
@@ -20,3 +20,12 @@
         }
       });
     });
+
+    let resCars = ""
+
+    $.get("/api/reservations/", function(data){
+      data.forEach(function (res) {
+      const i = resCardTemp(res)
+        resCards = rescards + i
+    })
+    })
