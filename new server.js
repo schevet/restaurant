@@ -18,6 +18,7 @@ app.use(express.static('public'))
 // Reservation Data (DATA)
 // =============================================================
 var reservations = [];
+var waitList = [];
 
 // Routes
 // =============================================================
@@ -49,6 +50,20 @@ app.get("/api/reservations/:reservation", function(req, res) {
   for (var i = 0; i < reservations.length; i++) {
     if (chosen === reservations[i].routeName) {
       return res.json(reservations[i]);
+    }
+  }
+
+  return res.json(false);
+});
+
+app.get("/api/waitList/:wlist", function(req, res) {
+  var chosen = req.params.wlist;
+
+  console.log(chosen);
+
+  for (var i = 0; i < waitList.length; i++) {
+    if (chosen === waitList[i].routeName) {
+      return res.json(waitList[i]);
     }
   }
 
