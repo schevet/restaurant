@@ -1,6 +1,6 @@
 
 
-    $("#add-btn").on("click", function(event) {
+    $("#makeRes").on("click", function(event) {
       event.preventDefault();
       const makeRes = {
         name: $("#name").val().trim(),
@@ -19,10 +19,12 @@
           // .then(function{})
         }
       });
-      
+
       $.post("/api/reservations", makeRes)
         .then(function(data) {
           console.log("add.html", data);
           alert("Adding character...");
         });
     });
+
+
