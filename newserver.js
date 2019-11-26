@@ -106,8 +106,8 @@ function createHTML(res, otherlist) {
               </div>
           </div>
       </div>
-  
-      <script src="js/search.js"></script>
+
+      <script src="js/view.js"></script>
   </body>
   
   </html>`
@@ -115,56 +115,61 @@ function createHTML(res, otherlist) {
 
 }
 
-
+let reservations = [];
 var currentTables = [];
 var waitList = [];
 
-
+app.get("/api/reservations", function (req, res){
+return res.json(reservations)
+})
 // Create New Reservations - takes in JSON input
 app.post("/api/reservations", function (req, res) {
 
   console.log("post")
   var newReservation = req.body;
-  let rescards = ""
-  let waitListCards = "";
+
+  reservations.push(newReservation);
+  res.json(newReservation)
+  // let rescards = ""
+  // let waitListCards = "";
  
 //  Checks if to see if any tables are open and if its not writes user info to wait list
-  if (currentTables.length <= 4) {
+  // if (currentTables.length <= 4) {
 
-    currentTables.push(newReservation)
+  //   currentTables.push(newReservation)
 
-    console.log("res")
-  } else {
+  //   console.log("res")
+  // } else {
 
-    waitList.push(newReservation)
+  //   waitList.push(newReservation)
 
     // Writes the objects in the waiting list to HTML 
-    for (i = 0; i < waitList.length; i++) {
-      const f = cardWait(waitList[i], i+1);
-      waitListCards = waitListCards + f
-    }
+  //   for (i = 0; i < waitList.length; i++) {
+  //     const f = cardWait(waitList[i], i+1);
+  //     waitListCards = waitListCards + f
+  //   }
     
-  }
+  // }
 
   // Writes the occupied tables information to html 
-  for (z = 0; currentTables.length > z; z++) {
-    const e = cards(currentTables[z], z+1);
-    rescards =   rescards + e
+  // for (z = 0; currentTables.length > z; z++) {
+  //   const e = cards(currentTables[z], z+1);
+  //   rescards =   rescards + e
 
-  }
+  // }
 
 
 //  Sends both html strings to a new html
-  const write = createHTML(rescards, waitListCards)
-  fs.writeFile("./public/view.html", write, function (err) {
-    if (err) {
-      return console.log(err);
-    } else {
-      console.log("printed")
-    }
+  // const write = createHTML(rescards, waitListCards)
+  // fs.writeFile("./public/view.html", write, function (err) {
+  //   if (err) {
+  //     return console.log(err);
+  //   } else {
+  //     console.log("printed")
+  //   }
 
-    // res.json(newReservation);
-  })
+  //   // res.json(newReservation);
+  // })
 })
 
 
